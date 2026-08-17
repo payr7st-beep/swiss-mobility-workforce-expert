@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.20/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.20",
+  "version": "1.0.0",
+  "id": "smwe-sevensprings-technology-ag",
+  "packageName": "com.sevensprings.smwe",
+  "developer": {
+    "name": "SevenSprings Technology AG",
+    "websiteUrl": "https://sevensprings.technology",
+    "privacyUrl": "https://sevensprings.technology/privacy",
+    "termsOfUseUrl": "https://sevensprings.technology/terms"
+  },
+  "icons": {
+    "color": "icon-color.png",
+    "outline": "icon-outline.png"
+  },
+  "name": {
+    "short": "Swiss Mobility Expert",
+    "full": "Swiss Mobility & Workforce Expert (SMWE)"
+  },
+  "description": {
+    "short": "Swiss mobility, immigration & cross-border compliance expert.",
+    "full": "The Swiss Mobility & Workforce Expert (SMWE) provides authoritative compliance guidance on Swiss work permits, G permits, cross-border work rules, global assignments, A1 certificates, social security agreements, double taxation treaties, shadow payroll, split payroll, and home-office-abroad regulations. Part of the SevenSprings Swiss Compliance Expert Suite alongside Swiss Payroll Expert (SPE) and Swiss Professional Companion (SPC)."
+  },
+  "accentColor": "#C8102E",
+  "copilotAgents": {
+    "declarativeAgents": [
+      {
+        "id": "SMWE",
+        "file": "declarativeAgent.json"
+      }
+    ]
+  },
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "sevensprings.technology"
+  ],
+  "showLoadingIndicator": true,
+  "isFullScreen": false,
+  "localizationInfo": {
+    "defaultLanguageTag": "en",
+    "additionalLanguages": [
+      {
+        "languageTag": "de",
+        "file": "de.json"
+      },
+      {
+        "languageTag": "fr",
+        "file": "fr.json"
+      }
+    ]
+  }
+}

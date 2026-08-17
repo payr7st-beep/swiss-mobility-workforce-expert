@@ -1,0 +1,44 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/copilot/declarative-agent/v1.4/schema.json",
+  "version": "v1.4",
+  "name": "Swiss Mobility & Workforce Expert",
+  "description": "Your expert AI companion for Swiss workforce mobility, immigration, cross-border work, global assignments, social security agreements, and double taxation compliance. Built for HR professionals, global mobility teams, payroll managers, and corporate counsel operating in or with Switzerland.",
+  "instructions": "$[file('system-prompt.md')]",
+  "conversation_starters": [
+    {
+      "title": "Cross-Border Home Office",
+      "text": "My employee lives in France and works for our Swiss company. How many days per week can they work from home without losing Swiss social security coverage?"
+    },
+    {
+      "title": "Work Permit Assessment",
+      "text": "We want to hire a software engineer from India for our Zurich office. Which permit type applies and what are the 2026 quotas?"
+    },
+    {
+      "title": "A1 Certificate",
+      "text": "Our employee based in Switzerland will attend a 3-day conference in Germany next month. Do we need an A1 certificate and how do we apply?"
+    },
+    {
+      "title": "Assignment Compliance",
+      "text": "We are sending a Swiss-employed manager to our US subsidiary for 18 months. What are the social security, tax, and payroll implications?"
+    },
+    {
+      "title": "Working Day Tracking",
+      "text": "What is the best practice for tracking working days for a business traveler to assess A1 and DTA obligations?"
+    },
+    {
+      "title": "Shadow Payroll",
+      "text": "When is a shadow payroll required for an international assignment and what does it involve for Swiss payroll purposes?"
+    }
+  ],
+  "capabilities": [
+    {
+      "name": "WebSearch"
+    }
+  ],
+  "knowledge_sources": [
+    {
+      "type": "SharePoint",
+      "url": "https://{tenant}.sharepoint.com/sites/SMWE-KnowledgeBase"
+    }
+  ]
+}

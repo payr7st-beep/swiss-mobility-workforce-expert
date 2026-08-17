@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swiss Mobility & Workforce Expert (SMWE) — Master Specification</title>
+<style>
+  :root {
+    --red: #C8102E;
+    --dark: #1a1a1a;
+    --mid: #444;
+    --light: #f8f8f8;
+    --border: #ddd;
+    --accent-bg: #fff5f5;
+    --green: #1a7a3c;
+    --amber: #b56f00;
+    --blue: #1a4f7a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: var(--dark); background: #fff; font-size: 14px; line-height: 1.6; }
+
+  /* Header */
+  .header { background: var(--red); color: white; padding: 32px 48px; }
+  .header-badge { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; margin-bottom: 8px; }
+  .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 4px; }
+  .header .subtitle { font-size: 16px; opacity: 0.9; margin-bottom: 16px; }
+  .header-meta { display: flex; gap: 24px; font-size: 12px; opacity: 0.75; flex-wrap: wrap; }
+  .header-meta span { display: flex; align-items: center; gap: 4px; }
+
+  /* Family bar */
+  .family-bar { background: var(--dark); color: white; padding: 10px 48px; display: flex; align-items: center; gap: 16px; font-size: 12px; }
+  .family-bar .family-label { opacity: 0.6; }
+  .family-chip { background: rgba(255,255,255,0.15); border-radius: 4px; padding: 3px 10px; font-weight: 600; }
+  .family-chip.active { background: var(--red); }
+
+  /* Nav */
+  nav { background: var(--light); border-bottom: 1px solid var(--border); padding: 0 48px; display: flex; gap: 0; overflow-x: auto; }
+  nav a { padding: 12px 16px; font-size: 13px; font-weight: 500; color: var(--mid); text-decoration: none; white-space: nowrap; border-bottom: 3px solid transparent; display: block; }
+  nav a:hover { color: var(--red); border-bottom-color: var(--red); }
+
+  /* Layout */
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 48px; }
+
+  /* Section */
+  section { margin-bottom: 48px; }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 8px; }
+  h2 { font-size: 22px; font-weight: 700; color: var(--dark); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--red); }
+  h3 { font-size: 16px; font-weight: 700; color: var(--dark); margin: 20px 0 10px; }
+  h4 { font-size: 14px; font-weight: 700; color: var(--mid); margin: 14px 0 8px; }
+  p { margin-bottom: 10px; color: #333; }
+
+  /* Cards */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .card { border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+  .card.red { border-left: 4px solid var(--red); }
+  .card.blue { border-left: 4px solid var(--blue); }
+  .card.green { border-left: 4px solid var(--green); }
+  .card.amber { border-left: 4px solid var(--amber); }
+  .card h4 { margin-top: 0; }
+  .card .code { font-size: 11px; font-family: monospace; background: var(--light); padding: 2px 6px; border-radius: 3px; color: var(--red); }
+
+  /* Domain grid */
+  .domain-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+  .domain-block { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .domain-header { background: var(--red); color: white; padding: 12px 16px; }
+  .domain-header .domain-id { font-size: 11px; opacity: 0.75; font-weight: 700; letter-spacing: 1px; }
+  .domain-header h4 { margin: 2px 0 0; font-size: 15px; color: white; }
+  .domain-body { padding: 12px 16px; }
+  .service-list { list-style: none; }
+  .service-list li { padding: 4px 0; border-bottom: 1px solid var(--border); font-size: 12px; display: flex; justify-content: space-between; align-items: center; }
+  .service-list li:last-child { border-bottom: none; }
+  .svc-code { font-family: monospace; font-size: 11px; color: var(--red); font-weight: 700; }
+
+  /* Table */
+  table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 13px; }
+  th { background: var(--dark); color: white; padding: 8px 12px; text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; }
+  td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:hover td { background: var(--light); }
+
+  /* Pricing */
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .pricing-card { border: 1px solid var(--border); border-radius: 8px; padding: 16px; text-align: center; }
+  .pricing-card.featured { border: 2px solid var(--red); background: var(--accent-bg); }
+  .pricing-tier { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--mid); margin-bottom: 8px; }
+  .pricing-price { font-size: 22px; font-weight: 700; color: var(--dark); }
+  .pricing-unit { font-size: 11px; color: var(--mid); }
+  .pricing-users { font-size: 12px; color: var(--mid); margin-top: 6px; }
+
+  /* Risk badges */
+  .risk-low { background: #e8f5e9; color: var(--green); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 12px; }
+  .risk-med { background: #fff8e1; color: var(--amber); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 12px; }
+  .risk-high { background: #ffebee; color: var(--red); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 12px; }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: var(--border); }
+  .timeline-item { position: relative; margin-bottom: 16px; }
+  .timeline-item::before { content: ''; position: absolute; left: -20px; top: 5px; width: 10px; height: 10px; background: var(--red); border-radius: 50%; }
+  .timeline-item .tl-label { font-size: 11px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 1px; }
+  .timeline-item .tl-text { font-size: 13px; color: var(--mid); }
+
+  /* Social */
+  .social-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .social-card { border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+  .social-platform { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .social-platform.linkedin { color: #0A66C2; }
+  .social-platform.instagram { color: #E1306C; }
+  .social-platform.facebook { color: #1877F2; }
+  .social-platform.x { color: var(--dark); }
+
+  /* Architecture */
+  .arch-flow { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 16px 0; }
+  .arch-box { background: var(--dark); color: white; padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 600; }
+  .arch-box.blue-bg { background: var(--blue); }
+  .arch-box.green-bg { background: var(--green); }
+  .arch-box.red-bg { background: var(--red); }
+  .arch-arrow { color: var(--mid); font-size: 18px; }
+
+  /* Badge */
+  .badge { display: inline-block; background: var(--light); border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; margin: 2px; }
+  .badge.reviewed { background: #e8f5e9; border-color: var(--green); color: var(--green); }
+  .badge.pending { background: #fff8e1; border-color: var(--amber); color: var(--amber); }
+
+  /* Code block */
+  pre { background: var(--dark); color: #e8e8e8; padding: 16px; border-radius: 6px; font-family: monospace; font-size: 12px; overflow-x: auto; margin: 12px 0; }
+
+  /* Footer */
+  footer { background: var(--dark); color: rgba(255,255,255,0.6); padding: 24px 48px; font-size: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; }
+  footer strong { color: white; }
+
+  @media (max-width: 700px) {
+    .container, .header, .family-bar, nav, footer { padding-left: 16px; padding-right: 16px; }
+    .card-grid, .domain-grid, .pricing-grid, .social-grid { grid-template-columns: 1fr; }
+    .arch-flow { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-badge">SevenSprings Technology AG — Swiss Compliance Expert Suite</div>
+  <h1>Swiss Mobility &amp; Workforce Expert</h1>
+  <div class="subtitle">SMWE — Declarative AI Agent for Swiss Immigration, Global Mobility &amp; Cross-Border Compliance</div>
+  <div class="header-meta">
+    <span>📅 Version 1.0 — August 2026</span>
+    <span>🏗 Microsoft Copilot Studio</span>
+    <span>🛒 Microsoft AppSource</span>
+    <span>👥 Family: SPE | SPC | SMWE</span>
+    <span>🔄 Next review: 1 Nov 2026</span>
+  </div>
+</div>
+
+<!-- FAMILY BAR -->
+<div class="family-bar">
+  <span class="family-label">SUITE:</span>
+  <span class="family-chip">Swiss Payroll Expert (SPE)</span>
+  <span class="family-chip">Swiss Professional Companion (SPC)</span>
+  <span class="family-chip active">Swiss Mobility &amp; Workforce Expert (SMWE) ← NEW</span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#overview">Overview</a>
+  <a href="#domains">Service Domains</a>
+  <a href="#knowledge">Knowledge Base</a>
+  <a href="#architecture">Architecture</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#update">Self-Learning</a>
+  <a href="#social">Social Media</a>
+  <a href="#sources">Sources</a>
+  <a href="#roadmap">Roadmap</a>
+</nav>
+
+<div class="container">
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="section-label">Product Overview</div>
+  <h2>What is SMWE?</h2>
+  <p>The <strong>Swiss Mobility &amp; Workforce Expert (SMWE)</strong> is a declarative AI agent built for Microsoft Copilot Studio, providing authoritative compliance guidance on Swiss workforce mobility, immigration, cross-border employment, global assignments, social security agreements, and international tax coordination.</p>
+  <p>SMWE is the third member of the SevenSprings Swiss Compliance Expert Suite — a family of specialist AI agents covering the full Swiss employment compliance landscape.</p>
+
+  <div class="card-grid" style="margin-top:20px">
+    <div class="card red">
+      <h4>What SMWE does</h4>
+      <p>Compliance guidance · Regulatory interpretation · Decision support on immigration, mobility, and cross-border work</p>
+    </div>
+    <div class="card green">
+      <h4>Who it serves</h4>
+      <p>HR professionals · Global mobility teams · Payroll managers · Corporate counsel · Fiduciaries · Employment lawyers</p>
+    </div>
+    <div class="card blue">
+      <h4>What it does NOT do</h4>
+      <p>Tax opinions · Legal filings · Immigration applications · Payroll calculations (→ SPE) · Staffing services (AVG-regulated)</p>
+    </div>
+    <div class="card amber">
+      <h4>Deployment</h4>
+      <p>Microsoft Copilot Studio declarative agent · Microsoft 365 · Microsoft Teams · AppSource Marketplace</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE DOMAINS -->
+<section id="domains">
+  <div class="section-label">Service Domains</div>
+  <h2>What SMWE Covers</h2>
+
+  <div class="domain-grid">
+    <div class="domain-block">
+      <div class="domain-header">
+        <div class="domain-id">D05</div>
+        <h4>Immigration Services</h4>
+      </div>
+      <div class="domain-body">
+        <ul class="service-list">
+          <li><span>Permit Assessment</span><span class="svc-code">IMM-001</span></li>
+          <li><span>B Permit (Annual)</span><span class="svc-code">IMM-002</span></li>
+          <li><span>C Permit (Settlement)</span><span class="svc-code">IMM-003</span></li>
+          <li><span>L Permit (Short-term)</span><span class="svc-code">IMM-004</span></li>
+          <li><span>G Permit (Cross-border)</span><span class="svc-code">IMM-005</span></li>
+          <li><span>Notification Procedure</span><span class="svc-code">IMM-006</span></li>
+          <li><span>Family Reunification</span><span class="svc-code">IMM-007</span></li>
+          <li><span>Permit Renewals</span><span class="svc-code">IMM-008</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="domain-block">
+      <div class="domain-header">
+        <div class="domain-id">D06</div>
+        <h4>Global Mobility</h4>
+      </div>
+      <div class="domain-body">
+        <ul class="service-list">
+          <li><span>Assignment Assessment</span><span class="svc-code">GM-001</span></li>
+          <li><span>Home Office Abroad</span><span class="svc-code">GM-002</span></li>
+          <li><span>Working Day Tracking</span><span class="svc-code">GM-003</span></li>
+          <li><span>Shadow Payroll</span><span class="svc-code">GM-004</span></li>
+          <li><span>Split Payroll</span><span class="svc-code">GM-005</span></li>
+          <li><span>A1 / PDA1 Certificate</span><span class="svc-code">GM-006</span></li>
+          <li><span>Social Security Treaty Analysis</span><span class="svc-code">GM-007</span></li>
+          <li><span>DTA Analysis</span><span class="svc-code">GM-008</span></li>
+          <li><span>Expatriate Compliance</span><span class="svc-code">GM-009</span></li>
+          <li><span>Business Traveler Assessment</span><span class="svc-code">GM-010</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="domain-block">
+      <div class="domain-header">
+        <div class="domain-id">D07</div>
+        <h4>Workforce Compliance</h4>
+      </div>
+      <div class="domain-body">
+        <ul class="service-list">
+          <li><span>Labour Law (OR/ArG)</span><span class="svc-code">WC-001</span></li>
+          <li><span>Employment Contracts</span><span class="svc-code">WC-002</span></li>
+          <li><span>Terminations</span><span class="svc-code">WC-003</span></li>
+          <li><span>Working Time</span><span class="svc-code">WC-004</span></li>
+          <li><span>Overtime</span><span class="svc-code">WC-005</span></li>
+          <li><span>GAV / CLA Analysis</span><span class="svc-code">WC-006</span></li>
+          <li><span>Employee Participation Plans</span><span class="svc-code">WC-007</span></li>
+          <li><span>Compliance Audit</span><span class="svc-code">WC-008</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="domain-block">
+      <div class="domain-header">
+        <div class="domain-id">D08</div>
+        <h4>Staffing Compliance <small style="font-weight:400;font-size:11px">(Advisory Only)</small></h4>
+      </div>
+      <div class="domain-body">
+        <ul class="service-list">
+          <li><span>AVG Interpretation</span><span class="svc-code">WSC-001</span></li>
+          <li><span>AVV Interpretation</span><span class="svc-code">WSC-002</span></li>
+          <li><span>GAV Personalverleih Guidance</span><span class="svc-code">WSC-003</span></li>
+          <li><span>Temporary Workforce Compliance</span><span class="svc-code">WSC-004</span></li>
+          <li><span>Cross-Border Staffing Compliance</span><span class="svc-code">WSC-005</span></li>
+          <li><span>Recruitment Regulatory Framework</span><span class="svc-code">WSC-006</span></li>
+          <li><span>Workforce Licensing Requirements</span><span class="svc-code">WSC-007</span></li>
+          <li><span>Compliance Risk Assessment</span><span class="svc-code">WSC-008</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="domain-block">
+      <div class="domain-header" style="background: var(--dark);">
+        <div class="domain-id">D10</div>
+        <h4>External Expert Network</h4>
+      </div>
+      <div class="domain-body">
+        <ul class="service-list">
+          <li><span>International Tax Advisor</span><span class="svc-code">EXT-003</span></li>
+          <li><span>DTA Advisory</span><span class="svc-code">EXT-004</span></li>
+          <li><span>Employee Stock Option Specialist</span><span class="svc-code">EXT-005</span></li>
+          <li><span>Immigration Lawyer</span><span class="svc-code">EXT-102</span></li>
+          <li><span>Labour Law Specialist</span><span class="svc-code">EXT-103</span></li>
+          <li><span>Payroll Specialist</span><span class="svc-code">EXT-201</span></li>
+          <li><span>SwissSalary Partner</span><span class="svc-code">EXT-203</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KNOWLEDGE BASE -->
+<section id="knowledge">
+  <div class="section-label">Knowledge Base</div>
+  <h2>Knowledge Modules</h2>
+
+  <table>
+    <tr>
+      <th>Module</th>
+      <th>Topics Covered</th>
+      <th>Key Legal Sources</th>
+      <th>Status</th>
+    </tr>
+    <tr>
+      <td><strong>KB-01</strong><br>Immigration</td>
+      <td>G/L/B/C permits, EU/EFTA vs TCN, 2026 quotas, notification procedure, family reunification</td>
+      <td>AIG, VZAE, AFMP, SEM Directives</td>
+      <td><span class="badge pending">Pending review</span></td>
+    </tr>
+    <tr>
+      <td><strong>KB-02</strong><br>Global Mobility</td>
+      <td>Assignment types, A1/CoC, working day tracking, shadow payroll, split payroll, expat lifecycle</td>
+      <td>EU Reg. 883/2004, 987/2009, ZAS, bilateral agreements</td>
+      <td><span class="badge pending">Pending review</span></td>
+    </tr>
+    <tr>
+      <td><strong>KB-03</strong><br>Cross-Border Work</td>
+      <td>CH-FR 40% rule, CH-DE physical presence, CH-IT old/new frontaliers, PE risk, posted workers</td>
+      <td>CH-DE DTA 1971, CH-FR DTA 1966+2023, CH-IT DTA 1976+2023, EntsG</td>
+      <td><span class="badge pending">Pending review</span></td>
+    </tr>
+    <tr>
+      <td><strong>KB-04</strong><br>Social Security Agreements</td>
+      <td>EU 883/2004 (Art. 11/12/13), bilateral agreements (30+ countries), no-agreement risk, AHV voluntary</td>
+      <td>EU Reg. 883/2004, 987/2009, ZAS database, BSV directives</td>
+      <td><span class="badge pending">Pending review</span></td>
+    </tr>
+    <tr>
+      <td><strong>KB-05</strong><br>Double Taxation Agreements</td>
+      <td>DTA Art. 4/15/16/18, 183-day rule, priority treaties (CH-DE/FR/IT/AT/UK/US/IN/CN), equity &amp; pensions</td>
+      <td>SIF DTA list (100+ countries), ESTV, OECD Model 2017</td>
+      <td><span class="badge pending">Pending review</span></td>
+    </tr>
+    <tr>
+      <td><strong>KB-06</strong><br>Workforce Compliance<br><em>(to be authored)</em></td>
+      <td>OR Art. 319-362, ArG, CLA/GAV (84 extended), employee participation plans (KS37)</td>
+      <td>OR, ArG, SECO, ESTV KS37, GAV Personalverleih</td>
+      <td><span class="badge pending">Authoring queue</span></td>
+    </tr>
+  </table>
+
+  <h3>Cross-Border Country Risk Matrix</h3>
+  <table>
+    <tr>
+      <th>Country</th>
+      <th>Home-Office Threshold</th>
+      <th>Tax Rule</th>
+      <th>Social Security</th>
+      <th>Risk</th>
+    </tr>
+    <tr>
+      <td><strong>France</strong></td>
+      <td>40% (telework agreement 2023)</td>
+      <td>Below 40%: Swiss QST. Above 40%: proportional French tax</td>
+      <td>EU 883/2004 — 49.9% threshold</td>
+      <td><span class="risk-low">🟢 Low</span></td>
+    </tr>
+    <tr>
+      <td><strong>Germany</strong></td>
+      <td>No formal safe harbour</td>
+      <td>Physical presence: each DE day taxable in DE. Salary split required</td>
+      <td>EU 883/2004 — 49.9% threshold</td>
+      <td><span class="risk-high">🔴 High</span></td>
+    </tr>
+    <tr>
+      <td><strong>Italy (new)</strong></td>
+      <td>25% (new frontaliers)</td>
+      <td>Concurrent CH+IT taxation (2023 agreement)</td>
+      <td>EU 883/2004 — 49.9% threshold</td>
+      <td><span class="risk-med">🟡 Medium</span></td>
+    </tr>
+    <tr>
+      <td><strong>Austria</strong></td>
+      <td>No formal safe harbour</td>
+      <td>Standard DTA Art. 15 — days in AT taxable in AT</td>
+      <td>EU 883/2004 — 49.9% threshold</td>
+      <td><span class="risk-med">🟡 Medium</span></td>
+    </tr>
+    <tr>
+      <td><strong>UK</strong></td>
+      <td>183-day rule (calendar year)</td>
+      <td>DTA 1977: standard Art. 15</td>
+      <td>Post-Brexit bilateral protocol (24 months)</td>
+      <td><span class="risk-med">🟡 Medium</span></td>
+    </tr>
+    <tr>
+      <td><strong>USA</strong></td>
+      <td>183-day rule, but US taxes own citizens globally</td>
+      <td>Totalization + DTA 1996+2009; FATCA reporting</td>
+      <td>US-CH totalization (60 months)</td>
+      <td><span class="risk-high">🔴 High</span></td>
+    </tr>
+  </table>
+</section>
+
+<!-- ARCHITECTURE -->
+<section id="architecture">
+  <div class="section-label">Technical Architecture</div>
+  <h2>System Design (mirrors SPE Phase 2)</h2>
+
+  <h3>Core Stack</h3>
+  <div class="arch-flow">
+    <div class="arch-box">Client / M365 Copilot</div>
+    <div class="arch-arrow">→</div>
+    <div class="arch-box red-bg">Azure App Service<br><small>Node.js Express</small></div>
+    <div class="arch-arrow">→</div>
+    <div class="arch-box blue-bg">Azure SQL DB<br><small>VECTOR(1024)</small></div>
+    <div class="arch-arrow">+</div>
+    <div class="arch-box green-bg">Entra External ID<br><small>CIAM</small></div>
+  </div>
+
+  <h3>Two-Door Architecture</h3>
+  <div class="card-grid">
+    <div class="card blue">
+      <h4>🌐 Web Door (<code>routes/ask.js</code>)</h4>
+      <p>Credit-metered · Entra External ID auth · Public SaaS product · Classes C0–C3</p>
+    </div>
+    <div class="card green">
+      <h4>🔌 MCP Door (<code>mcp/server.js</code>)</h4>
+      <p>Read-only tools for Hermes/SPE agent roster · Shared secret auth · Tools: <code>smwe_lookup</code>, <code>smwe_treaty</code>, <code>smwe_permit</code></p>
+    </div>
+  </div>
+
+  <h3>Query Classes</h3>
+  <table>
+    <tr><th>Class</th><th>Description</th><th>Credits</th><th>LLM</th></tr>
+    <tr><td><strong>C0</strong></td><td>Exact lookup (quota figure, treaty country)</td><td>1</td><td>None</td></tr>
+    <tr><td><strong>C1</strong></td><td>Single-domain (G permit conditions, A1 process)</td><td>2</td><td>Mid-tier</td></tr>
+    <tr><td><strong>C2</strong></td><td>Cross-domain advisory (permit + A1 + DTA analysis)</td><td>5</td><td>Frontier</td></tr>
+    <tr><td><strong>C3</strong></td><td>Document analysis (assignment letter, permit decision)</td><td>10</td><td>Frontier + long ctx</td></tr>
+  </table>
+
+  <h3>Copilot Studio Deployment</h3>
+  <pre>{
+  "$schema": "https://developer.microsoft.com/json-schemas/copilot/declarative-agent/v1.4/schema.json",
+  "version": "v1.4",
+  "name": "Swiss Mobility &amp; Workforce Expert",
+  "capabilities": [{ "name": "WebSearch" }],
+  "knowledge_sources": [{ "type": "SharePoint", "url": "https://{tenant}.sharepoint.com/sites/SMWE-KB" }]
+}</pre>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-label">Pricing</div>
+  <h2>Subscription Tiers</h2>
+
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="pricing-tier">Free</div>
+      <div class="pricing-price">CHF 0</div>
+      <div class="pricing-unit">/month</div>
+      <div class="pricing-users">1 user · C0–C1 only · 5/day</div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">Individual</div>
+      <div class="pricing-price">CHF 149</div>
+      <div class="pricing-unit">/month</div>
+      <div class="pricing-users">1 user · C0–C2 · 75/day</div>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-tier">Professional</div>
+      <div class="pricing-price">CHF 399</div>
+      <div class="pricing-unit">/month</div>
+      <div class="pricing-users">1–5 users · All classes · 200/day</div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">Team</div>
+      <div class="pricing-price">CHF 999</div>
+      <div class="pricing-unit">/month</div>
+      <div class="pricing-users">6–25 users · All classes · 500/day</div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">Business</div>
+      <div class="pricing-price">CHF 1,999</div>
+      <div class="pricing-unit">/month</div>
+      <div class="pricing-users">26–100 users · Pooled · SLA</div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">Enterprise</div>
+      <div class="pricing-price">Custom</div>
+      <div class="pricing-unit"></div>
+      <div class="pricing-users">Unlimited · Pooled · Full SLA</div>
+    </div>
+  </div>
+
+  <p><strong>Suite bundle:</strong> SPE + SMWE = 20% discount on second product · SPE + SPC + SMWE = 30% discount on suite</p>
+</section>
+
+<!-- SELF-LEARNING -->
+<section id="update">
+  <div class="section-label">Self-Learning & Updates</div>
+  <h2>Four-Layer Update Mechanism</h2>
+
+  <div class="card-grid">
+    <div class="card red">
+      <h4>Layer 1 — Gap Detection (Real-Time)</h4>
+      <p>Query log scanned every 24h. Low-quality answers flagged and clustered into topic gaps. Admin dashboard surfaces authoring backlog.</p>
+      <p class="code">gapDetector.js — runs via GitHub Actions cron 01:00 CET</p>
+    </div>
+    <div class="card blue">
+      <h4>Layer 2 — Regulatory Monitoring (Monthly)</h4>
+      <p>Monthly scan of SEM, SECO, BSV, ZAS, SIF, ESTV for regulatory changes. High-frequency watch list with defined triggers.</p>
+    </div>
+    <div class="card green">
+      <h4>Layer 3 — Quarterly KB Review</h4>
+      <p>Full knowledge-base review every quarter. Expert sign-off required before modules marked <code>reviewed: true</code>. Version increment deployed.</p>
+    </div>
+    <div class="card amber">
+      <h4>Layer 4 — Annual Major Refresh</h4>
+      <p>Complete alignment with current-year legal sources. All figures, thresholds, quota numbers updated. Major version increment.</p>
+    </div>
+  </div>
+
+  <h3>Regulatory Watch Calendar</h3>
+  <div class="timeline" style="margin-top:16px">
+    <div class="timeline-item">
+      <div class="tl-label">1 January</div>
+      <div class="tl-text">DBG, AHVG, BVG figures; Fedlex statutes; DTA treaty entry into force</div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-label">1 January &amp; 1 July</div>
+      <div class="tl-text">SECO CLA extensions (AVE/AVEG); new extended CLAs</div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-label">1 August 2026</div>
+      <div class="tl-text">SECO confirmed 84 extended CLAs in force (46 national + 38 cantonal) — this version baseline</div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-label">October / November</div>
+      <div class="tl-text">SEM announces next-year immigration quotas for L and B permits (third-country nationals)</div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-label">Quarterly (UK)</div>
+      <div class="tl-text">UK quota batches released: 1,400 L + 2,100 B per quarter</div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL MEDIA -->
+<section id="social">
+  <div class="section-label">Go-To-Market</div>
+  <h2>Social Media Strategy</h2>
+
+  <div class="social-grid">
+    <div class="social-card">
+      <div class="social-platform linkedin">LinkedIn (Primary)</div>
+      <p><strong>4–5 posts/week.</strong> Educational pillars, regulatory updates, product news, scenario Q&amp;A. Sponsored content targeting HR Directors, Global Mobility Managers, Employment Lawyers in CH/DE/FR/IT/UK.</p>
+      <p><em>Target: 5,000 followers / Month 12</em></p>
+    </div>
+    <div class="social-card">
+      <div class="social-platform instagram">Instagram (Secondary)</div>
+      <p><strong>3 posts/week + 5 Stories.</strong> Carousel infographics, visual explainers, Reels (30–60s). Brand-consistent Swiss Red palette. Multilingual EN/DE.</p>
+      <p><em>Target: 2,000 followers / Month 12</em></p>
+    </div>
+    <div class="social-card">
+      <div class="social-platform facebook">Facebook (Supporting)</div>
+      <p><strong>2–3 posts/week.</strong> Repurposed LinkedIn content. Community engagement in cross-border worker and expat groups. Product announcements.</p>
+    </div>
+    <div class="social-card">
+      <div class="social-platform x">X.com (Reactive)</div>
+      <p><strong>2–3 posts/day.</strong> Real-time regulatory reactions. Engagement with @SECO_CH, @sem_online, @BSV_OFAS. Product milestones. Retweet global mobility media.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:24px">Microsoft Marketplace Certification Checklist</h3>
+  <table>
+    <tr><th>Item</th><th>Status</th></tr>
+    <tr><td>App manifest v1.20</td><td>✅ Complete</td></tr>
+    <tr><td>Declarative agent manifest v1.4</td><td>✅ Complete</td></tr>
+    <tr><td>Conversation starters (≥6)</td><td>✅ Complete</td></tr>
+    <tr><td>Privacy policy &amp; Terms of Use</td><td>⏳ Pending — URL to be confirmed</td></tr>
+    <tr><td>Teams Store validation guidelines compliance</td><td>⏳ Pending review</td></tr>
+    <tr><td>AI disclosure in every response</td><td>✅ Built into system prompt</td></tr>
+    <tr><td>Content moderation (no personal data in knowledge base)</td><td>✅ Content policy enforced</td></tr>
+    <tr><td>EU data residency (Azure Switzerland North preferred)</td><td>⏳ Pending infra provisioning</td></tr>
+    <tr><td>Microsoft Entra External ID (CIAM) SSO</td><td>⏳ Pending infra provisioning</td></tr>
+    <tr><td>Expert fiduciary sign-off (reviewed: true)</td><td>⏳ Pending — sign-off gate open</td></tr>
+  </table>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <div class="section-label">Source Register</div>
+  <h2>Authoritative Sources</h2>
+  <table>
+    <tr><th>Authority</th><th>Domain</th><th>Key Sources</th><th>URL</th></tr>
+    <tr><td>SEM</td><td>Immigration</td><td>AIG, VZAE, SEM Directives</td><td>sem.admin.ch</td></tr>
+    <tr><td>SECO</td><td>CLAs, Posted Workers</td><td>84 CLAs, EntsG/EntsV</td><td>seco.admin.ch</td></tr>
+    <tr><td>BSV/OFAS</td><td>Social Security</td><td>WML, WBB, A1 procedure</td><td>bsv.admin.ch</td></tr>
+    <tr><td>ZAS</td><td>SS Agreements</td><td>Bilateral agreement database</td><td>zas.admin.ch</td></tr>
+    <tr><td>SIF</td><td>DTAs</td><td>100+ DTA status list (Jan 2026)</td><td>sif.admin.ch</td></tr>
+    <tr><td>ESTV/AFC</td><td>Tax</td><td>KS45, KS37, QST, DTA country pages</td><td>estv.admin.ch</td></tr>
+    <tr><td>EUR-Lex</td><td>EU law</td><td>Reg. 883/2004, Reg. 987/2009</td><td>eur-lex.europa.eu</td></tr>
+    <tr><td>Fedlex</td><td>Swiss statutes</td><td>AIG SR 142.20, OR SR 220, AHVG SR 831.10</td><td>fedlex.admin.ch</td></tr>
+    <tr><td>SSK</td><td>Tax conference</td><td>Inter-cantonal circulars</td><td>ssk-cdf.ch</td></tr>
+  </table>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="section-label">Roadmap</div>
+  <h2>Build Phases</h2>
+  <table>
+    <tr><th>Phase</th><th>Scope</th><th>Target</th></tr>
+    <tr><td><strong>Phase A</strong></td><td>Core declarative agent + system prompt + 5 KB modules (KB-01 to KB-05) + Copilot Studio deployment</td><td>Q3 2026</td></tr>
+    <tr><td><strong>Phase B</strong></td><td>Azure backend: App Service + Azure SQL VECTOR + embeddings ingestion + retrieval core</td><td>Q4 2026</td></tr>
+    <tr><td><strong>Phase C</strong></td><td>Entra External ID CIAM + credit ledger + SaaS metering + Paddle MoR</td><td>Q4 2026</td></tr>
+    <tr><td><strong>Phase D</strong></td><td>MCP server (smwe_lookup / smwe_treaty / smwe_permit) + SPE agent registry integration</td><td>Q1 2027</td></tr>
+    <tr><td><strong>Phase E</strong></td><td>Gap detector + feedback loop + quarterly KB review workflow</td><td>Q1 2027</td></tr>
+    <tr><td><strong>Phase F</strong></td><td>Microsoft AppSource certification submission + Teams Store listing</td><td>Q1 2027</td></tr>
+    <tr><td><strong>Phase G</strong></td><td>KB-06 Workforce Compliance authoring + expert sign-off on all modules</td><td>Q2 2027</td></tr>
+    <tr><td><strong>Phase H</strong></td><td>Suite integration: SPE + SPC + SMWE cross-product sessions</td><td>Q2 2027</td></tr>
+  </table>
+</section>
+
+</div><!-- /container -->
+
+<footer>
+  <div><strong>Swiss Mobility &amp; Workforce Expert (SMWE)</strong> · SevenSprings Technology AG · v1.0 · August 2026</div>
+  <div>Family: SPE | SPC | <strong>SMWE</strong> · Microsoft AppSource · <a href="https://marketplace.microsoft.com" style="color:rgba(255,255,255,0.5)">marketplace.microsoft.com</a></div>
+</footer>
+
+</body>
+</html>
