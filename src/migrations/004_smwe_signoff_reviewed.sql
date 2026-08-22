@@ -6,4 +6,4 @@ WHERE source_file IN (
   'SMWE-KB-01-Immigration.md','SMWE-KB-02-GlobalMobility.md','SMWE-KB-03-CrossBorder.md',
   'SMWE-KB-04-SocialSecurity.md','SMWE-KB-05-DTAs.md','SMWE-KB-06-WorkforceCompliance.md'
 ) AND embedding IS NOT NULL;
-SELECT source_file,COUNT(*) AS total,SUM(reviewed) AS reviewed FROM smwe_chunks GROUP BY source_file ORDER BY source_file;
+SELECT source_file,COUNT(*) AS total,SUM(CAST(reviewed AS INT)) AS reviewed FROM smwe_chunks GROUP BY source_file ORDER BY source_file;
