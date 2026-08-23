@@ -15,11 +15,15 @@ jobs:
           node-version: '22'
       - run: npm ci
         working-directory: src
-      - uses: azure/webapps-deploy@v2
-        with:
-          app-name: smwe-api
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_API }}
-          package: src
+      - name: Deploy to smwe-api via Kudu zipdeploy
+        env:
+          PUBLISH_PROFILE: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_API }}
+        run: |
+          USER=$(python3 -c "import os,re; x=os.environ['PUBLISH_PROFILE']; print(re.search(r'userName=\"([^\"]+)\"', x).group(1))")
+          PASS=$(python3 -c "import os,re; x=os.environ['PUBLISH_PROFILE']; print(re.search(r'userPWD=\"([^\"]+)\"', x).group(1))")
+          cd src && zip -r ../app.zip . --exclude 'node_modules/*'
+          curl -f -X POST https://smwe-api.scm.azurewebsites.net/api/zipdeploy \
+            -u "$USER:$PASS" --data-binary @../app.zip -H "Content-Type: application/zip"
 
   deploy-mcp:
     runs-on: ubuntu-latest
