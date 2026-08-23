@@ -1,17 +1,8 @@
-﻿// Copyright (c) 2024-2026 SevenSprings Technology AG, Switzerland. All rights reserved.
+// Copyright (c) 2024-2026 SevenSprings Technology AG, Switzerland. All rights reserved.
 // Proprietary and confidential. Unauthorised use prohibited. See LICENSE.
 'use strict';
-
-/**
- * config/db.js — Azure SQL connection pool (mssql)
- *
- * Identical pattern to SPE config/db.js — one pool, lazily initialised,
- * reused across requests. VECTOR(1024) type is used for RAG chunks.
- */
-
 require('dotenv').config();
 const sql = require('mssql');
-
 const config = {
   server:   process.env.DB_SERVER,
   database: process.env.DB_NAME,
@@ -28,14 +19,21 @@ const config = {
     idleTimeoutMillis: 30000,
   },
 };
-
 let _pool = null;
-
+let _connecting = null;
 async function getPool() {
   if (_pool) return _pool;
-  _pool = await sql.connect(config);
-  console.log('[db] Connected to Azure SQL:', process.env.DB_SERVER);
-  return _pool;
+  if (!_connecting) {
+    _connecting = sql.connect(config).then(pool => {
+      _pool = pool;
+      _connecting = null;
+      console.log('[db] Connected to Azure SQL:', process.env.DB_SERVER);
+      return pool;
+    }).catch(err => {
+      _connecting = null;
+      throw err;
+    });
+  }
+  return _connecting;
 }
-
 module.exports = { getPool, sql };
