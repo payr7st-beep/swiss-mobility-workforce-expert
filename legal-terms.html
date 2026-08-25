@@ -1,0 +1,762 @@
+<title>Terms of Use — Swiss Mobility Workforce Expert</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap">
+
+<style>
+  /* === TOKEN SYSTEM === */
+  :root {
+    --bg: #F6F7F9;
+    --surface: #FFFFFF;
+    --text: #111827;
+    --text-secondary: #374151;
+    --muted: #5E6E8A;
+    --accent: #1A54A8;
+    --accent-hover: #153F82;
+    --accent-light: #EBF2FC;
+    --border: #DCE2ED;
+    --warn-bg: #FFF8EC;
+    --warn-border: #D97706;
+    --warn-text: #7C4A03;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0F1521;
+      --surface: #182033;
+      --text: #E2E8F4;
+      --text-secondary: #B4C0D8;
+      --muted: #7A8EAD;
+      --accent: #4A8FE0;
+      --accent-hover: #6BA5E8;
+      --accent-light: #1A2B45;
+      --border: #253047;
+      --warn-bg: #241A07;
+      --warn-border: #B45309;
+      --warn-text: #FCD38A;
+      --shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #0F1521;
+    --surface: #182033;
+    --text: #E2E8F4;
+    --text-secondary: #B4C0D8;
+    --muted: #7A8EAD;
+    --accent: #4A8FE0;
+    --accent-hover: #6BA5E8;
+    --accent-light: #1A2B45;
+    --border: #253047;
+    --warn-bg: #241A07;
+    --warn-border: #B45309;
+    --warn-text: #FCD38A;
+    --shadow: 0 1px 4px rgba(0,0,0,0.3);
+  }
+
+  /* === RESET & BASE === */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+
+  body {
+    font-family: 'Source Sans 3', 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* === HEADER === */
+  .site-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    gap: 1rem;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: var(--text);
+    flex-shrink: 0;
+  }
+
+  .brand-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 7px;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: #fff;
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+  }
+
+  .brand-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  .brand-sub {
+    font-size: 0.7rem;
+    color: var(--muted);
+    font-weight: 400;
+    display: block;
+  }
+
+  .header-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  /* === MAIN LAYOUT === */
+  .page-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 5rem;
+  }
+
+  /* === DOCUMENT HEADER === */
+  .doc-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .doc-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .doc-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--text);
+    text-wrap: balance;
+    margin-bottom: 1rem;
+  }
+
+  .doc-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
+  .doc-meta span { display: flex; align-items: center; gap: 0.35rem; }
+
+  /* === DISCLAIMER BANNER === */
+  .disclaimer-banner {
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-border);
+    border-left: 4px solid var(--warn-border);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2.5rem;
+    font-size: 0.875rem;
+    color: var(--warn-text);
+    line-height: 1.6;
+  }
+
+  .disclaimer-banner strong {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 0.78rem;
+  }
+
+  /* === TABLE OF CONTENTS === */
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  .toc-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .toc-list {
+    list-style: none;
+    columns: 2;
+    column-gap: 2rem;
+  }
+
+  @media (max-width: 580px) { .toc-list { columns: 1; } }
+
+  .toc-list li {
+    margin-bottom: 0.25rem;
+    break-inside: avoid;
+  }
+
+  .toc-list a {
+    font-size: 0.85rem;
+    color: var(--accent);
+    text-decoration: none;
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+  }
+
+  .toc-list a:hover { color: var(--accent-hover); text-decoration: underline; }
+
+  .toc-num {
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+    width: 1.6em;
+  }
+
+  /* === SECTIONS === */
+  .section {
+    margin-bottom: 2.75rem;
+    scroll-margin-top: 80px;
+  }
+
+  .section-heading {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.9rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    line-height: 1.3;
+    text-wrap: balance;
+  }
+
+  .sec-num {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+    padding-top: 0.2rem;
+  }
+
+  .section p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.9rem;
+    max-width: 72ch;
+  }
+
+  .section p:last-child { margin-bottom: 0; }
+
+  /* === DEFINITION LIST === */
+  .def-list {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 1rem 0;
+  }
+
+  .def-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.88rem;
+  }
+
+  .def-row:last-child { border-bottom: none; }
+
+  .def-term {
+    padding: 0.65rem 1rem;
+    font-weight: 600;
+    color: var(--text);
+    background: var(--bg);
+    border-right: 1px solid var(--border);
+  }
+
+  .def-desc {
+    padding: 0.65rem 1rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+
+  @media (max-width: 520px) {
+    .def-row { grid-template-columns: 1fr; }
+    .def-term { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+
+  /* === CREDIT TABLE === */
+  .credit-table-wrap { overflow-x: auto; margin: 1rem 0; }
+
+  .credit-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .credit-table th {
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.6rem 0.9rem;
+    text-align: left;
+  }
+
+  .credit-table td {
+    padding: 0.55rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+  }
+
+  .credit-table tr:last-child td { border-bottom: none; }
+
+  .credit-table tr:nth-child(even) td { background: var(--bg); }
+
+  .class-badge {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 0.72rem;
+    padding: 0.1rem 0.45rem;
+    border-radius: 4px;
+    background: var(--accent-light);
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+
+  /* === PROHIBITED LIST === */
+  .prohibited-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0.75rem 0;
+  }
+
+  .prohibited-list li {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    padding-left: 1.5rem;
+    position: relative;
+    line-height: 1.55;
+  }
+
+  .prohibited-list li::before {
+    content: "×";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #C53030;
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+
+  /* === CONTACT BLOCK === */
+  .contact-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    box-shadow: var(--shadow);
+  }
+
+  .contact-block strong {
+    display: block;
+    color: var(--text);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .contact-block a { color: var(--accent); }
+  .contact-block a:hover { color: var(--accent-hover); }
+
+  /* === FOOTER === */
+  .doc-footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    justify-content: space-between;
+  }
+
+  .doc-footer a { color: var(--muted); text-decoration: underline; }
+
+  /* === FOCUS & A11Y === */
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+  @media (max-width: 640px) {
+    .page-wrapper { padding: 1.5rem 1.25rem 4rem; }
+    .doc-title { font-size: 1.8rem; }
+    .header-badge { display: none; }
+  }
+</style>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="https://sevensprings.ch" class="brand" aria-label="SevenSprings Technology AG — Home">
+      <div class="brand-logo" aria-hidden="true">7ST</div>
+      <div>
+        <span class="brand-name">SevenSprings Technology AG</span>
+        <span class="brand-sub">Swiss Payroll · AI · Global Compliance</span>
+      </div>
+    </a>
+    <span class="header-badge">Legal</span>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<main class="page-wrapper" id="mainContent">
+
+  <!-- Document header -->
+  <div class="doc-header">
+    <div class="doc-eyebrow">Swiss Mobility Workforce Expert</div>
+    <h1 class="doc-title">Terms of Use</h1>
+    <div class="doc-meta">
+      <span>Effective date: 1 August 2026</span>
+      <span>Last updated: 25 August 2026</span>
+      <span>Version 1.1</span>
+      <span>Governing law: Switzerland</span>
+    </div>
+  </div>
+
+  <!-- Important disclaimer -->
+  <div class="disclaimer-banner" role="note" aria-label="Important notice">
+    <strong>⚠ Advisory notice — not legal advice</strong>
+    The Swiss Mobility Workforce Expert ("SMWE") provides compliance guidance, regulatory interpretation, and decision support only. It does not provide legal advice, legal opinions, immigration filing services, tax advice, tax filings, or employee recruitment services. All outputs are indicative and must be confirmed with the competent authority or a qualified professional before being relied upon for real-world determinations.
+  </div>
+
+  <!-- Table of contents -->
+  <nav class="toc" aria-label="Table of contents">
+    <div class="toc-title">Contents</div>
+    <ol class="toc-list">
+      <li><a href="#s1"><span class="toc-num">1.</span> Acceptance of Terms</a></li>
+      <li><a href="#s2"><span class="toc-num">2.</span> Definitions</a></li>
+      <li><a href="#s3"><span class="toc-num">3.</span> Description of the Service</a></li>
+      <li><a href="#s4"><span class="toc-num">4.</span> Access, Accounts, and Credits</a></li>
+      <li><a href="#s5"><span class="toc-num">5.</span> Subscription Plans</a></li>
+      <li><a href="#s6"><span class="toc-num">6.</span> Permitted Use</a></li>
+      <li><a href="#s7"><span class="toc-num">7.</span> Prohibited Use</a></li>
+      <li><a href="#s8"><span class="toc-num">8.</span> Advisory Disclaimer</a></li>
+      <li><a href="#s9"><span class="toc-num">9.</span> Limitation of Liability</a></li>
+      <li><a href="#s10"><span class="toc-num">10.</span> Intellectual Property</a></li>
+      <li><a href="#s11"><span class="toc-num">11.</span> Data Protection</a></li>
+      <li><a href="#s12"><span class="toc-num">12.</span> Third-Party Services</a></li>
+      <li><a href="#s13"><span class="toc-num">13.</span> Modifications to the Service</a></li>
+      <li><a href="#s14"><span class="toc-num">14.</span> Termination</a></li>
+      <li><a href="#s15"><span class="toc-num">15.</span> Governing Law and Jurisdiction</a></li>
+      <li><a href="#s16"><span class="toc-num">16.</span> Contact</a></li>
+    </ol>
+  </nav>
+
+  <!-- Sections -->
+  <section class="section" id="s1">
+    <h2 class="section-heading"><span class="sec-num">01</span> Acceptance of Terms</h2>
+    <p>By accessing or using the Swiss Mobility Workforce Expert ("SMWE", "the Service"), you ("User", "you") agree to be bound by these Terms of Use ("Terms"). If you access the Service through Microsoft AppSource, Microsoft Teams, or Microsoft Copilot Studio, your use is additionally subject to the relevant Microsoft marketplace terms.</p>
+    <p>If you are accepting these Terms on behalf of a company or other legal entity, you represent that you have the authority to bind that entity to these Terms. If you do not accept these Terms in their entirety, you may not use the Service.</p>
+    <p>SevenSprings Technology AG reserves the right to update these Terms at any time. Continued use of the Service following notice of changes constitutes acceptance of the revised Terms.</p>
+  </section>
+
+  <section class="section" id="s2">
+    <h2 class="section-heading"><span class="sec-num">02</span> Definitions</h2>
+    <div class="def-list">
+      <div class="def-row">
+        <div class="def-term">SevenSprings / We</div>
+        <div class="def-desc">SevenSprings Technology AG, a company incorporated under Swiss law with registered office in Switzerland.</div>
+      </div>
+      <div class="def-row">
+        <div class="def-term">SMWE / Service</div>
+        <div class="def-desc">The Swiss Mobility Workforce Expert AI agent, including its web interface, Microsoft Copilot Studio channel, API, and related documentation.</div>
+      </div>
+      <div class="def-row">
+        <div class="def-term">User / you</div>
+        <div class="def-desc">Any individual or legal entity that accesses the Service under a valid account.</div>
+      </div>
+      <div class="def-row">
+        <div class="def-term">Credits</div>
+        <div class="def-desc">The usage units consumed when the Service processes a query, allocated per subscription tier or purchased as top-up packs.</div>
+      </div>
+      <div class="def-row">
+        <div class="def-term">Output</div>
+        <div class="def-desc">Any response, determination, report, or content generated by the Service in response to a User query.</div>
+      </div>
+      <div class="def-row">
+        <div class="def-term">Competent Authority</div>
+        <div class="def-desc">The relevant government body, immigration office, cantonal authority, or social security institution with jurisdiction over the matter at hand.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="s3">
+    <h2 class="section-heading"><span class="sec-num">03</span> Description of the Service</h2>
+    <p>SMWE is a declarative AI agent built on Microsoft Copilot Studio and Azure infrastructure. It provides compliance guidance and regulatory interpretation in the following domains:</p>
+    <div class="def-list">
+      <div class="def-row">
+        <div class="def-term">Immigration (D05)</div>
+        <div class="def-desc">Permit classification, EU/EFTA and third-country national tracks, quota monitoring under Swiss immigration law (AIG, VZAE, AuG).</div>
+      </div>
+      <div class="def-row">
+        <div class="def-term">Global Mobility (D06)</div>
+        <div class="def-desc">Assignment categories, Certificate of Coverage (A1), shadow payroll guidance, permanent establishment risk awareness.</div>
+      </div>
+      <div class="def-row">
+        <div class="def-term">Workforce Compliance (D07)</div>
+        <div class="def-desc">Swiss Code of Obligations (OR), Labour Act (ArG), collective labour agreements (CLAs), employee participation law.</div>
+      </div>
+      <div class="def-row">
+        <div class="def-term">Staffing Advisory (D08)</div>
+        <div class="def-desc">Read-only guidance on the Temporary Staffing Act (AVG) and staffing compliance. Does not constitute a staffing or recruitment service.</div>
+      </div>
+      <div class="def-row">
+        <div class="def-term">Expert Network (D10)</div>
+        <div class="def-desc">Referrals to qualified immigration lawyers, international tax advisors, and Swiss fiduciaries (Treuhänder). Referrals are informational only.</div>
+      </div>
+    </div>
+    <p>All rule sets embedded in the Service are derived from publicly available Swiss and EU legislation. Statutory text is reproduced pursuant to Swiss URG Art. 5 and the EU's open reuse policy for EUR-Lex publications. Proprietary or annotated third-party commentary is not reproduced.</p>
+  </section>
+
+  <section class="section" id="s4">
+    <h2 class="section-heading"><span class="sec-num">04</span> Access, Accounts, and Credits</h2>
+    <p>Access to the Service is provided through a credit-based consumption model. Credits are deducted atomically before each query is processed. The Service will decline a request if the account balance is insufficient. Credits are non-refundable except where required by applicable Swiss consumer protection law.</p>
+    <div class="credit-table-wrap">
+      <table class="credit-table">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Query type</th>
+            <th>Credits per query</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="class-badge">C0</span></td>
+            <td>Exact lookup (quota number, treaty country status)</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td><span class="class-badge">C1</span></td>
+            <td>Single-domain question (A1 process, G-permit conditions)</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td><span class="class-badge">C2</span></td>
+            <td>Cross-domain advisory (assignment: permit + A1 + DTA)</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <td><span class="class-badge">C3</span></td>
+            <td>Document analysis (assignment letter, permit decision, shadow payroll review)</td>
+            <td>10</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Top-up credit packs expire 90 days from the date of purchase. Subscription credits are allocated on a rolling daily basis and do not carry over. SevenSprings reserves the right to adjust credit pricing with 30 days' notice.</p>
+    <p>You are responsible for maintaining the security of your account credentials. SevenSprings is not liable for loss arising from unauthorised account access resulting from your failure to safeguard your credentials.</p>
+  </section>
+
+  <section class="section" id="s5">
+    <h2 class="section-heading"><span class="sec-num">05</span> Subscription Plans</h2>
+    <p>The Service is available under the following subscription tiers. All prices are stated in Swiss Francs (CHF) and exclude VAT where applicable.</p>
+    <div class="credit-table-wrap">
+      <table class="credit-table">
+        <thead>
+          <tr>
+            <th>Tier</th>
+            <th>Price (CHF/month)</th>
+            <th>Daily credits</th>
+            <th>Seats</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Free</td><td>0</td><td>5 (C0–C1 only)</td><td>1</td></tr>
+          <tr><td>Individual</td><td>149</td><td>75 (C0–C2)</td><td>1</td></tr>
+          <tr><td>Professional</td><td>399</td><td>200 (all classes)</td><td>1–5</td></tr>
+          <tr><td>Team</td><td>999</td><td>500 (all classes)</td><td>6–25</td></tr>
+          <tr><td>Business</td><td>1,999</td><td>Pooled 1,200/day</td><td>26–100</td></tr>
+          <tr><td>Enterprise</td><td>Custom</td><td>Pooled, SLA</td><td>Unlimited</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Subscription billing is processed through SevenSprings' authorised payment provider. Subscriptions renew automatically unless cancelled before the renewal date. Bundle discounts apply when the Service is purchased together with Swiss Payroll Expert (SPE) or Swiss Professional Companion (SPC).</p>
+  </section>
+
+  <section class="section" id="s6">
+    <h2 class="section-heading"><span class="sec-num">06</span> Permitted Use</h2>
+    <p>Subject to these Terms, SevenSprings grants you a limited, non-exclusive, non-transferable, revocable licence to access and use the Service solely for your internal business compliance, HR, and global mobility planning activities. Permitted use includes:</p>
+    <ul class="prohibited-list" style="list-style:none;">
+      <li style="padding-left:1.5rem; position:relative;">
+        <span style="position:absolute;left:0;color:var(--accent);font-weight:700;">✓</span>
+        Researching applicable permit types for international assignments into or out of Switzerland.
+      </li>
+      <li style="padding-left:1.5rem; position:relative;">
+        <span style="position:absolute;left:0;color:var(--accent);font-weight:700;">✓</span>
+        Obtaining initial guidance on A1 Certificate of Coverage eligibility and process.
+      </li>
+      <li style="padding-left:1.5rem; position:relative;">
+        <span style="position:absolute;left:0;color:var(--accent);font-weight:700;">✓</span>
+        Checking applicable CLA (Gesamtarbeitsvertrag) requirements for a workforce category.
+      </li>
+      <li style="padding-left:1.5rem; position:relative;">
+        <span style="position:absolute;left:0;color:var(--accent);font-weight:700;">✓</span>
+        Reviewing Double Taxation Agreement (DTA) applicability for cross-border worker situations.
+      </li>
+      <li style="padding-left:1.5rem; position:relative;">
+        <span style="position:absolute;left:0;color:var(--accent);font-weight:700;">✓</span>
+        Sharing Outputs internally with colleagues involved in the same HR or compliance matter.
+      </li>
+    </ul>
+  </section>
+
+  <section class="section" id="s7">
+    <h2 class="section-heading"><span class="sec-num">07</span> Prohibited Use</h2>
+    <p>You may not use the Service in any manner that:</p>
+    <ul class="prohibited-list">
+      <li>Relies on Outputs as a substitute for qualified legal, immigration, or tax advice without independent verification by a licensed professional.</li>
+      <li>Submits or files any immigration application, tax return, or legal document using Output as the sole basis.</li>
+      <li>Reproduces, resells, sublicences, or commercially distributes Outputs to third parties outside your organisation.</li>
+      <li>Attempts to reverse-engineer, scrape, or extract the Service's knowledge base, rule sets, or embeddings.</li>
+      <li>Inputs any personal data (individual names, passport numbers, tax identification numbers, salary details) into the Service beyond what is strictly necessary for an anonymised compliance query.</li>
+      <li>Circumvents, disables, or interferes with any security, credit, or rate-limiting mechanism of the Service.</li>
+      <li>Uses the Service to provide immigration, legal, or tax services commercially to third parties without a separate written agreement with SevenSprings.</li>
+      <li>Violates any applicable Swiss, EU, or international law or regulation.</li>
+    </ul>
+  </section>
+
+  <section class="section" id="s8">
+    <h2 class="section-heading"><span class="sec-num">08</span> Advisory Disclaimer</h2>
+    <p>SMWE provides compliance guidance, regulatory interpretation, and decision support. <strong>It does not provide, and must not be understood as providing</strong>: legal advice or legal opinions; immigration case management or immigration filings; tax opinions, tax planning advice, or tax return preparation; actuarial, fiduciary, or investment advice; employee placement, staffing, or recruitment services (activities regulated under the Temporary Staffing Act, AVG/Ordonnance sur le placement).</p>
+    <p>Every Output generated by the Service carries a mandatory disclaimer: <em>"This output is indicative and must be confirmed with the competent authority. SMWE does not provide legal advice, tax advice, or immigration filing services."</em> This disclaimer is a material term of these Terms of Use.</p>
+    <p>Rule sets embedded in the Service are sourced from authoritative legal references. A rule set is not considered production-ready for real-world determinations until it has been reviewed and signed off by a qualified Immigration Lawyer, Global Mobility Expert, or Swiss fiduciary (Treuhänder). SevenSprings publishes the sign-off status of each rule set in its documentation. You are responsible for checking the current sign-off status before relying on any Output for a real determination.</p>
+  </section>
+
+  <section class="section" id="s9">
+    <h2 class="section-heading"><span class="sec-num">09</span> Limitation of Liability</h2>
+    <p>To the maximum extent permitted by Swiss law, SevenSprings and its directors, employees, and agents shall not be liable for any indirect, incidental, special, consequential, or exemplary damages arising out of or in connection with your use of the Service, including loss of profits, business interruption, regulatory penalties, or costs of substitute professional advice, even if SevenSprings has been advised of the possibility of such damages.</p>
+    <p>SevenSprings' aggregate liability to you for any claim arising out of or relating to these Terms or the Service shall not exceed the total fees paid by you to SevenSprings in the twelve months immediately preceding the event giving rise to the claim, or CHF 500, whichever is greater.</p>
+    <p>Nothing in these Terms limits liability that cannot be excluded under mandatory Swiss law, including liability for wilful misconduct (Absicht) or gross negligence (grobe Fahrlässigkeit) causing personal injury or death.</p>
+  </section>
+
+  <section class="section" id="s10">
+    <h2 class="section-heading"><span class="sec-num">10</span> Intellectual Property</h2>
+    <p>The Service, including its software, AI models, system prompts, architecture, rule sets, and all content produced by SevenSprings (excluding statutory text reproduced from public sources), is owned by or licensed to SevenSprings Technology AG and is protected by Swiss and international intellectual property laws.</p>
+    <p>Statutory text reproduced from Swiss federal legislation is in the public domain pursuant to Swiss URG Art. 5. Statutory text reproduced from EU legislation is used in accordance with the European Union's open reuse policy for EUR-Lex publications.</p>
+    <p>SevenSprings grants you no rights in the Service beyond the limited licence described in Section 6. SevenSprings, Swiss Mobility Workforce Expert, Swiss Payroll Expert, Swiss Professional Companion, and related marks are trademarks of SevenSprings Technology AG. You may not use these marks without prior written permission.</p>
+  </section>
+
+  <section class="section" id="s11">
+    <h2 class="section-heading"><span class="sec-num">11</span> Data Protection</h2>
+    <p>SevenSprings processes personal data in accordance with the Swiss Federal Act on Data Protection (nDSG / revDSG, SR 235.1) and, where applicable, the EU General Data Protection Regulation (GDPR). SevenSprings' Privacy Policy, available at <a href="https://sevensprings.ch/legal/privacy">sevensprings.ch/legal/privacy</a>, governs the collection and use of personal data and forms part of these Terms.</p>
+    <p>SMWE is designed on a data-minimisation principle. No personal immigration case data, individual salary information, employee records, or tax filings are stored in the Service's knowledge base or vector store. The Service's knowledge store holds only published regulatory text and derived embeddings. Customer records are limited to identity and credit accounting information necessary to operate the Service.</p>
+    <p>You are responsible for ensuring that any information you submit to the Service complies with applicable data protection law, including obtaining any necessary consents from data subjects before inputting their information.</p>
+  </section>
+
+  <section class="section" id="s12">
+    <h2 class="section-heading"><span class="sec-num">12</span> Third-Party Services</h2>
+    <p>The Service is built on and integrates with third-party platforms including Microsoft Azure, Microsoft Copilot Studio, and Microsoft Teams. Your use of those platforms is subject to their respective terms of service and privacy policies. SevenSprings is not responsible for the availability, accuracy, or conduct of third-party platforms.</p>
+    <p>The Service may refer you to members of the SevenSprings Expert Network (Domain D10), including immigration lawyers, international tax advisors, and fiduciaries. Such referrals are informational only. SevenSprings does not endorse, warrant, or accept liability for the services provided by referred third parties. Any engagement with a referred expert is a separate, direct relationship between you and that expert.</p>
+  </section>
+
+  <section class="section" id="s13">
+    <h2 class="section-heading"><span class="sec-num">13</span> Modifications to the Service and Terms</h2>
+    <p>SevenSprings reserves the right to modify, suspend, or discontinue any aspect of the Service at any time, with or without notice, including credit rates, subscription tiers, and feature availability. SevenSprings will endeavour to provide reasonable advance notice of material changes affecting paid subscribers.</p>
+    <p>These Terms were last updated on 25 August 2026. SevenSprings will notify registered users of material changes to these Terms by email or in-Service notice at least 30 days before the changes take effect. Your continued use of the Service after that period constitutes acceptance of the revised Terms.</p>
+  </section>
+
+  <section class="section" id="s14">
+    <h2 class="section-heading"><span class="sec-num">14</span> Termination</h2>
+    <p>You may terminate your account at any time by contacting SevenSprings at the address in Section 16. Termination does not entitle you to a refund of unused credits or prepaid subscription fees except where required by Swiss consumer protection law.</p>
+    <p>SevenSprings may suspend or terminate your access to the Service immediately, without prior notice, if you breach these Terms in a material way, including prohibited uses under Section 7, non-payment of fees, or if SevenSprings is required to do so by law or a competent authority.</p>
+    <p>Upon termination, the licence granted to you under Section 6 ceases immediately. Sections 8, 9, 10, 11, 15, and 16 survive termination.</p>
+  </section>
+
+  <section class="section" id="s15">
+    <h2 class="section-heading"><span class="sec-num">15</span> Governing Law and Jurisdiction</h2>
+    <p>These Terms are governed exclusively by the substantive laws of Switzerland, without regard to its conflict-of-law provisions and without application of the United Nations Convention on Contracts for the International Sale of Goods (CISG).</p>
+    <p>Any dispute arising out of or in connection with these Terms or the Service that cannot be resolved amicably shall be subject to the exclusive jurisdiction of the courts of the Canton of Zurich, Switzerland. SevenSprings reserves the right to seek injunctive or other equitable relief in any competent jurisdiction.</p>
+    <p>If you are a consumer resident in the European Union, you retain the benefit of any mandatory consumer protection provisions of the law of your country of residence that cannot be derogated from by contract.</p>
+  </section>
+
+  <section class="section" id="s16">
+    <h2 class="section-heading"><span class="sec-num">16</span> Contact</h2>
+    <div class="contact-block">
+      <strong>SevenSprings Technology AG</strong>
+      For questions regarding these Terms of Use or data protection enquiries, please contact:<br><br>
+      Email: <a href="mailto:info@sevensprings.ch">info@sevensprings.ch</a><br>
+      Website: <a href="https://sevensprings.ch">sevensprings.ch</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="doc-footer">
+    <span>© 2026 SevenSprings Technology AG. All rights reserved.</span>
+    <span>
+      <a href="https://sevensprings.ch/legal/privacy">Privacy Policy</a>
+      &nbsp;·&nbsp;
+      <a href="https://sevensprings.ch/legal/terms">Terms of Use</a>
+    </span>
+  </footer>
+
+</main>
