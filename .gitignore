@@ -2,3 +2,8 @@ node_modules/
 .env
 *.log
 .DS_Store
+
+# Local CI build artefacts (produced by package-copilot.yml)
+_staging/
+_package/
+*.zip
