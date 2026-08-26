@@ -6,9 +6,6 @@
 #   • tag  v*.*.*           → build + attach to a GitHub Release
 #   • workflow_dispatch     → manual run
 #
-# Required repo secrets:
-#   SHAREPOINT_TENANT   e.g.  contoso  (used in knowledge_sources URL)
-#
 # Required repo files (add before your first tagged release):
 #   copilot-studio/icon-color.png    192 × 192 px, full-colour
 #   copilot-studio/icon-outline.png   32 ×  32 px, transparent outline
@@ -43,34 +40,25 @@ jobs:
           done
           [ $MISSING -eq 0 ] || exit 1
 
-      # ── 3. Resolve build-time tokens in declarativeAgent.json ────────────
-      #   a) $[file('system-prompt.md')]  → inline the file content as a JSON string
-      #   b) {tenant}                     → replace with SHAREPOINT_TENANT secret
+      # ── 3. Inline file tokens in declarativeAgent.json ───────────────────
+      #   $[file('system-prompt.md')]  → inline the file content as a JSON string
       - name: Resolve declarativeAgent.json tokens
-        env:
-          SHAREPOINT_TENANT: ${{ secrets.SHAREPOINT_TENANT }}
         run: |
           python3 - << 'PYEOF'
-          import json, re, os, pathlib
+          import json, re, pathlib
 
           src_dir = pathlib.Path("copilot-studio")
           agent_path = src_dir / "declarativeAgent.json"
 
           raw = agent_path.read_text(encoding="utf-8")
 
-          # a) inline $[file('system-prompt.md')]
+          # Inline $[file('system-prompt.md')]
           def inline_file(match):
               fname = match.group(1)
               content = (src_dir / fname).read_text(encoding="utf-8")
               return json.dumps(content)          # produces a properly escaped JSON string
 
           raw = re.sub(r'\"\$\[file\(\'([^\']+)\'\)\]\"', inline_file, raw)
-
-          # b) replace {tenant} placeholder
-          tenant = os.environ.get("SHAREPOINT_TENANT", "")
-          if not tenant:
-              print("::warning ::SHAREPOINT_TENANT secret is not set — {tenant} left as-is in knowledge_sources URL.")
-          raw = raw.replace("{tenant}", tenant)
 
           # Write resolved file to a staging area
           staging = pathlib.Path("_staging")

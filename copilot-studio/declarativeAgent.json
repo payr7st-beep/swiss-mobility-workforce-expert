@@ -34,11 +34,5 @@
     {
       "name": "WebSearch"
     }
-  ],
-  "knowledge_sources": [
-    {
-      "type": "SharePoint",
-      "url": "https://{tenant}.sharepoint.com/sites/SMWE-KnowledgeBase"
-    }
   ]
 }
